@@ -154,6 +154,9 @@ Covid_Season['Average Yellow goals'] = Covid_Season['Total Yellow Cards'] / Covi
 Covid_Season['Average Red goals'] = Covid_Season['Total Red Cards'] / Covid_Season['Games']
 print(Covid_Season)
 
+sns.countplot(x='Average Home goals', data = Covid_Season)
+plt.show()
+
 ### Pre covid Home results by team
 homeprecovid = precovid_results.copy()
 
