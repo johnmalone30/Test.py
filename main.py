@@ -150,12 +150,39 @@ Covid_Season['Average Home goals'] = Covid_Season['Home Goals'] / Covid_Season['
 Covid_Season['Average Away goals'] = Covid_Season['Away Goals'] / Covid_Season['Games']
 
 # Average Number of Red and Yellow Cards
-Covid_Season['Average Yellow goals'] = Covid_Season['Total Yellow Cards'] / Covid_Season['Games']
-Covid_Season['Average Red goals'] = Covid_Season['Total Red Cards'] / Covid_Season['Games']
+Covid_Season['Average Yellow Cards'] = Covid_Season['Total Yellow Cards'] / Covid_Season['Games']
+Covid_Season['Average Red Cards'] = Covid_Season['Total Red Cards'] / Covid_Season['Games']
 print(Covid_Season)
 
-sns.countplot(x='Average Home goals', data = Covid_Season)
+#Produce bar charts to represent the data
+plt.style.use('bmh')
+fig, ax= plt.subplots()
+ax.bar(Covid_Season.index,Covid_Season['Average Home goals'])
+ax.set_title('Average Home Goals scored')
+ax.set_ylabel('Number of goals', rotation=90)
+
+fig, ax= plt.subplots()
+ax.bar(Covid_Season.index,Covid_Season['Average Away goals'])
+ax.set_title('Average Away Goals scored')
+ax.set_ylabel('Number of goals', rotation=90)
+
+fig, ax= plt.subplots()
+ax.bar(Covid_Season.index,Covid_Season['Average Yellow Cards'])
+ax.set_title('Average Yellow cards')
+ax.set_ylabel('Number of cards', rotation=90)
+
+fig, ax= plt.subplots()
+ax.bar(Covid_Season.index,Covid_Season['Average Red Cards'])
+ax.set_title('Average Red cards')
+ax.set_ylabel('Number of cards', rotation=90)
+
+fig, ax= plt.subplots()
+ax.bar(Covid_Season.index,Covid_Season['Comebacks'])
+ax.set_title('Comebacks')
+ax.set_ylabel('Number of Comebacks', rotation=90)
 plt.show()
+
+
 
 ### Pre covid Home results by team
 homeprecovid = precovid_results.copy()
@@ -402,3 +429,4 @@ print(home_gamesprec.head())
 print(away_gamesprec.head())
 print(home_gamespostc.head())
 print(away_gamespostc.head())
+
