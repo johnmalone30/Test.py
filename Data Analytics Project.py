@@ -138,32 +138,31 @@ Covid_Season['Average Away goals'] = Covid_Season['Away Goals'] / Covid_Season['
 # Average Number of Red and Yellow Cards
 Covid_Season['Average Yellow Cards'] = Covid_Season['Total Yellow Cards'] / Covid_Season['Games']
 Covid_Season['Average Red Cards'] = Covid_Season['Total Red Cards'] / Covid_Season['Games']
-print(Covid_Season)
 
 #Produce bar charts to represent the data
-plt.style.use('bmh')
+plt.style.use('seaborn-whitegrid')
 fig, ax= plt.subplots()
-ax.bar(Covid_Season.index,Covid_Season['Average Home goals'])
+ax.bar(Covid_Season.index,Covid_Season['Average Home goals'], color='maroon')
 ax.set_title('Average Home Goals scored')
 ax.set_ylabel('Number of goals', rotation=90)
 
 fig, ax= plt.subplots()
-ax.bar(Covid_Season.index,Covid_Season['Average Away goals'])
+ax.bar(Covid_Season.index,Covid_Season['Average Away goals'],color='maroon')
 ax.set_title('Average Away Goals scored')
 ax.set_ylabel('Number of goals', rotation=90)
 
 fig, ax= plt.subplots()
-ax.bar(Covid_Season.index,Covid_Season['Average Yellow Cards'])
+ax.bar(Covid_Season.index,Covid_Season['Average Yellow Cards'],color='maroon')
 ax.set_title('Average Yellow cards')
 ax.set_ylabel('Number of cards', rotation=90)
 
 fig, ax= plt.subplots()
-ax.bar(Covid_Season.index,Covid_Season['Average Red Cards'])
+ax.bar(Covid_Season.index,Covid_Season['Average Red Cards'],color='maroon')
 ax.set_title('Average Red cards')
 ax.set_ylabel('Number of cards', rotation=90)
 
 fig, ax= plt.subplots()
-ax.bar(Covid_Season.index,Covid_Season['Comebacks'])
+ax.bar(Covid_Season.index,Covid_Season['Comebacks'],color='maroon')
 ax.set_title('Comebacks')
 ax.set_ylabel('Number of Comebacks', rotation=90)
 plt.show()
@@ -287,34 +286,40 @@ covid_season_away=covid_season_away.reindex(columns=column_order)
 print(covid_season_home)
 print(covid_season_away)
 
-#Create columns for the avareage number of goals scored and conceded
+#Create columns for the average number of goals scored and conceded
 covid_season_home['Average number of goals scored']=covid_season_home['Goals Scored']/covid_season_home['Games']
 covid_season_home['Average number of goals conceded']= covid_season_home['Goals Conceded']/covid_season_home['Games']
 covid_season_away['Average number of goals scored']=covid_season_away['Goals Scored']/covid_season_away['Games']
 covid_season_away['Average number of goals conceded']= covid_season_away['Goals Conceded']/covid_season_away['Games']
-#Create some barcharts
+
+#Create barcharts to visualise the data
 sns.set_style("whitegrid")
 sns.set_palette('bright')
+covid_season_home.sort_values(by=['Goals Scored'], inplace=True, ascending=False)
 sns.barplot(x='Goals Scored', y='HomeTeam',hue='Season', data=covid_season_home.reset_index())
 plt.ylabel("Team", rotation=90, fontsize=10)
 plt.title("Total Goals Scored Pre & Post Covid at home", fontsize=15)
 plt.show()
 
+covid_season_away.sort_values(by=['Goals Scored'], inplace=True, ascending=False)
 sns.barplot(x='Goals Scored', y='AwayTeam',hue='Season', data=covid_season_away.reset_index())
 plt.ylabel("Team", rotation=90, fontsize=10)
 plt.title("Total Goals Scored Pre & Post Covid away from home", fontsize=15)
 plt.show()
 
+covid_season_home.sort_values(by=['Goals Conceded'], inplace=True, ascending=False)
 sns.barplot(x='Goals Conceded', y='HomeTeam',hue='Season', data=covid_season_home.reset_index())
 plt.ylabel("Team", rotation=90, fontsize=10)
 plt.title("Total Goals conceded Pre & Post Covid at home", fontsize=15)
 plt.show()
 
-sns.barplot(x='Goals Conceded', y='HomeTeam',hue='Season', data=covid_season_home.reset_index())
+covid_season_away.sort_values(by=['Goals Conceded'], inplace=True, ascending=False)
+sns.barplot(x='Goals Conceded', y='AwayTeam',hue='Season', data=covid_season_away.reset_index())
 plt.ylabel('Team', rotation=90, fontsize=10)
 plt.title("Total Goals conceded Pre & Post Covid away from home", fontsize=15)
 plt.show()
 
+covid_season_home.sort_values(by=['Average number of goals scored'], inplace=True, ascending=False)
 sns.barplot(x='HomeTeam', y='Average number of goals scored' ,hue='Season', data=covid_season_home.reset_index())
 plt.xticks(rotation=30, fontsize=8)
 plt.xlabel('Team', fontsize= 10)
@@ -322,13 +327,15 @@ plt.ylabel("Goals", rotation=90, fontsize=10)
 plt.title('Average No of goals scored at home Pre & Post Covid', fontsize=15)
 plt.show()
 
-sns.barplot(x='HomeTeam', y='Average number of goals conceded' ,hue='Season', data=covid_season_home.reset_index())
+covid_season_home.sort_values(by=['Average number of goals conceded'], inplace=True, ascending=False)
+sns.barplot(x='HomeTeam', y='Average number of goals conceded',hue='Season', data=covid_season_home.reset_index())
 plt.xticks(rotation=30, fontsize=8)
 plt.xlabel('Team', fontsize= 10)
 plt.ylabel("Goals", rotation=90, fontsize=10)
 plt.title('Average No of goals conceded at home Pre & Post Covid', fontsize=15)
 plt.show()
 
+covid_season_away.sort_values(by=['Average number of goals scored'], inplace=True, ascending=False)
 sns.barplot(x='AwayTeam', y='Average number of goals scored' ,hue='Season', data=covid_season_away.reset_index())
 plt.xticks(rotation=30, fontsize=8)
 plt.xlabel('Team',fontsize= 10)
@@ -336,6 +343,7 @@ plt.ylabel("Goals", rotation=90, fontsize=10)
 plt.title('Average No of goals scored away from home Pre & Post Covid', fontsize=15)
 plt.show()
 
+covid_season_away.sort_values(by=['Average number of goals conceded'], inplace=True, ascending=False)
 sns.barplot(x='AwayTeam', y='Average number of goals conceded' ,hue='Season', data=covid_season_away.reset_index())
 plt.xticks(rotation=30, fontsize=8)
 plt.xlabel('Team',fontsize= 10)
